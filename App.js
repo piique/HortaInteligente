@@ -1,56 +1,116 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React, { useState } from 'react';
+import {
+  AsyncStorage,
+  StyleSheet,
+  Button,
+  View,
+  SafeAreaView,
+  Text,
+  Alert,
+} from 'react-native';
+// import Constants from 'expo-constants';
 
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+function Separator() {
+  return <View style={styles.separator} />;
+}
 
-class Clock extends Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { date: new Date() };
 
-    setInterval(() => {
-      this.setState({ date: new Date() });
-    }, 1000);
+    this.state = {
+      status: false,
+    };
+
+    abrirIrrigacao = () => {
+      // Alert.alert('Left button pressed');
+      // codigo para abrir a irrigação com mqtt
+      this.setState({ status: true });
+    };
+
+    fecharIrrigacao = () => {
+      // Alert.alert('Left button pressed');
+      // codigo para abrir a irrigação com mqtt
+      this.setState({ status: false });
+    };
+
+    storeError = () => {
+      // Alert.alert('Estourou erro porra');
+    };
+  }
+
+  // chamado ao entrar no aplicativo
+  componentDidMount() {
+    // visualizar estado atual da aplicação (se mangueira esta aberta ou fechada)
+    // Alert.alert('Entrou na aplicação');
   }
 
   render() {
     return (
-      <Text style={{ fontSize: 50 }}>
-        {this.props.mode == 'date'
-          ? 'Data: ' + this.state.date.toLocaleDateString()
-          : 'Hora: ' + this.state.date.toLocaleTimeString()}
-      </Text>
+      <SafeAreaView style={styles.container}>
+        <View>
+          <Text style={styles.title}>
+            Irrigação ligará ao atingir 30% de umidade do solo
+          </Text>
+          <Separator />
+
+          <Text style={styles.percentual}>
+            Percentual humidade do solo: 70%
+          </Text>
+          <Text style={styles.status}>
+            Irrigação {this.state.status == true ? 'aberta' : 'fechada'}
+          </Text>
+        </View>
+
+        <Separator />
+        <View>
+          <View style={styles.buttons}>
+            <Button
+              title="  Abrir Irrigação  "
+              onPress={() => {
+                abrirIrrigacao();
+              }}
+            />
+            <Button
+              title=" Fechar Irrigação "
+              onPress={() => {
+                fecharIrrigacao();
+              }}
+            />
+          </View>
+        </View>
+      </SafeAreaView>
     );
   }
 }
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <View style={styles.app}>
-        <Clock mode="date" />
-        <Clock mode="hour" />
-      </View>
-    </>
-  );
-};
-
 const styles = StyleSheet.create({
-  app: {
-    backgroundColor: 'rgb(74, 64, 255)',
+  container: {
+    flex: 1,
+    marginTop: 100,
+    marginHorizontal: 16,
   },
-  component: {
-    color: 'blue',
-    fontSize: 45,
-    justifyContent: 'center',
-    alignContent: 'center',
+  title: {
+    textAlign: 'center',
+    marginVertical: 8,
+    fontSize: 30,
+  },
+  percentual: {
+    marginLeft: 20,
+    fontSize: 20,
+  },
+  status: {
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  buttons: {
+    height: 40,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+  separator: {
+    marginVertical: 50,
+    borderBottomColor: '#737373',
+    // borderBottomWidth: StyleSheet.hairlineWidth, // adiciona linha cinza para separar
   },
 });
-
-export default App;
