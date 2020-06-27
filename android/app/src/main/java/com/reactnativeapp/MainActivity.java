@@ -1,7 +1,8 @@
 package com.reactnativeapp;
 
 import com.facebook.react.ReactActivity;
-
+import com.tuanpm.RCTMqtt.*; // import
+ 
 public class MainActivity extends ReactActivity {
 
   /**
