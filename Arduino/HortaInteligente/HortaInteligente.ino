@@ -22,16 +22,9 @@
 const char *mqtt_server = "broker.mqtt-dashboard.com";
 
 // configurações de conexão local do WiFi
-const char *ssid = "VIVOFIBRA-9422"; // retirar isso
-const char *password = "33946422";   // retirar isso
 
-//const char* ssid = "NOME_REDE_WIFI";
-//const char* password = "SENHA_REDE_WIFI";
-
-//const char* ssid = "GVT-3508";
-//const char* password = "5403000139";
-//const char* ssid = "Silvana_casa";
-//const char* password = "14061949";
+const char *ssid = "NOME_REDE_WIFI";
+const char *password = "SENHA_REDE_WIFI";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
