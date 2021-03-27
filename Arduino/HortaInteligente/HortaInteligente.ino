@@ -115,15 +115,15 @@ void callback(char *topic, byte *payload, unsigned int length)
 
   if (!strcmp(topic, TOPICO_SUBSCRIBE))
   {
-    if (!strncmp((char *)payload, "abrir", length))
+    if (!strncmp((char *)payload, "fechar", length))
     {
-      digitalWrite(D0, HIGH); // LIGA IRRIGAÇÃO
-      Serial.println("Irrigação ligada");
-    }
-    else if (!strncmp((char *)payload, "fechar", length))
-    {
-      digitalWrite(D0, LOW); // DESLIGA IRRIGAÇÃO
+      digitalWrite(D0, HIGH); // DESLIGA IRRIGAÇÃO
       Serial.println("Irrigação desligada");
+    }
+    else if (!strncmp((char *)payload, "abrir", length))
+    {
+      digitalWrite(D0, LOW); // LIGA IRRIGAÇÃO
+      Serial.println("Irrigação ligada");
     }
   }
 }
